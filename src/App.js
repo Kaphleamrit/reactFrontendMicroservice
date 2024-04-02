@@ -6,10 +6,10 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
-  // const backendUrl = "http://localhost:8090/tasks"
+  const backendUrl = "http://go-backend:8090"
 
   useEffect(() => {
-    fetch('http://localhost:8090/tasks')
+    fetch(backendUrl + '/tasks')
       .then((response) => response.json())
       .then((data) => setTasks(data))
       .catch((error) => console.error("There was an error!", error));
@@ -21,7 +21,7 @@ function App() {
     const task = tasks.find(task => task.id === id);
   const updatedTask = { ...task, completed: !task.completed };
 
-  fetch(`http://localhost:8090/tasks/${id}`, {
+  fetch(`http://go-backend:8090/tasks/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function App() {
 
 
   const deleteTask = (id) => {
-    fetch(`http://localhost:8090/tasks/${id}`, {
+    fetch(`http://go-backend:8090/tasks/${id}`, {
     method: 'DELETE',
   })
   .then(() => {
@@ -61,7 +61,7 @@ function App() {
       completed: false,
     };
 
-    fetch('http://localhost:8090/tasks', {
+    fetch('http://go-backend:8090/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
